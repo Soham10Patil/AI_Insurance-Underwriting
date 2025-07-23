@@ -1,0 +1,352 @@
+[
+  {
+    "ingredient_name":"Ascorbic Acid",
+    "aliases":"Vitamin C, L-Ascorbic Acid",
+    "label":0,
+    "risk_level":"Low",
+    "side_effects":"None known"
+  },
+  {
+    "ingredient_name":"Citric Acid",
+    "aliases":"E330",
+    "label":0,
+    "risk_level":"Low",
+    "side_effects":"None known"
+  },
+  {
+    "ingredient_name":"Sodium Chloride",
+    "aliases":"Salt, NaCl",
+    "label":0,
+    "risk_level":"Low",
+    "side_effects":"High blood pressure if excessive"
+  },
+  {
+    "ingredient_name":"Sugar",
+    "aliases":"Sucrose, Cane Sugar",
+    "label":0,
+    "risk_level":"Moderate",
+    "side_effects":"Diabetes, obesity if excessive"
+  },
+  {
+    "ingredient_name":"Water",
+    "aliases":"H2O",
+    "label":0,
+    "risk_level":"Low",
+    "side_effects":"None known"
+  },
+  {
+    "ingredient_name":"Monosodium Glutamate",
+    "aliases":"MSG, E621",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Headaches, nausea, allergic reactions"
+  },
+  {
+    "ingredient_name":"Sodium Benzoate",
+    "aliases":"E211",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"Hyperactivity, allergic reactions"
+  },
+  {
+    "ingredient_name":"Potassium Sorbate",
+    "aliases":"E202",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"Skin irritation, allergic reactions"
+  },
+  {
+    "ingredient_name":"Calcium Propionate",
+    "aliases":"E282",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"None known in normal amounts"
+  },
+  {
+    "ingredient_name":"Sodium Nitrite",
+    "aliases":"E250",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Cancer risk, methemoglobinemia"
+  },
+  {
+    "ingredient_name":"Aspartame",
+    "aliases":"E951, NutraSweet",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Headaches, seizures, mood disorders"
+  },
+  {
+    "ingredient_name":"Acesulfame Potassium",
+    "aliases":"Ace-K, E950",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Headaches, depression"
+  },
+  {
+    "ingredient_name":"Sucralose",
+    "aliases":"E955, Splenda",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"Digestive issues, headaches"
+  },
+  {
+    "ingredient_name":"Saccharin",
+    "aliases":"E954",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Cancer risk, bladder tumors"
+  },
+  {
+    "ingredient_name":"High Fructose Corn Syrup",
+    "aliases":"HFCS, Corn Syrup",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Obesity, diabetes, liver damage"
+  },
+  {
+    "ingredient_name":"Butylated Hydroxyanisole",
+    "aliases":"BHA, E320",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Cancer risk, endocrine disruption"
+  },
+  {
+    "ingredient_name":"Butylated Hydroxytoluene",
+    "aliases":"BHT, E321",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Cancer risk, hormone disruption"
+  },
+  {
+    "ingredient_name":"Tertiary Butylhydroquinone",
+    "aliases":"TBHQ, E319",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Nausea, vomiting, delirium"
+  },
+  {
+    "ingredient_name":"Propyl Gallate",
+    "aliases":"E310",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"Allergic reactions, stomach upset"
+  },
+  {
+    "ingredient_name":"Sodium Sulfite",
+    "aliases":"E221",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"Headaches, nausea, diarrhea"
+  },
+  {
+    "ingredient_name":"Carrageenan",
+    "aliases":"E407",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Inflammation, digestive issues"
+  },
+  {
+    "ingredient_name":"Xanthan Gum",
+    "aliases":"E415",
+    "label":0,
+    "risk_level":"Low",
+    "side_effects":"Digestive upset in large amounts"
+  },
+  {
+    "ingredient_name":"Guar Gum",
+    "aliases":"E412",
+    "label":0,
+    "risk_level":"Low",
+    "side_effects":"Digestive upset in large amounts"
+  },
+  {
+    "ingredient_name":"Lecithin",
+    "aliases":"E322",
+    "label":0,
+    "risk_level":"Low",
+    "side_effects":"None known"
+  },
+  {
+    "ingredient_name":"Pectin",
+    "aliases":"E440",
+    "label":0,
+    "risk_level":"Low",
+    "side_effects":"None known"
+  },
+  {
+    "ingredient_name":"Artificial Vanilla",
+    "aliases":"Vanillin",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"Allergic reactions in sensitive individuals"
+  },
+  {
+    "ingredient_name":"Natural Flavors",
+    "aliases":"Natural Flavoring",
+    "label":0,
+    "risk_level":"Low",
+    "side_effects":"Allergic reactions possible"
+  },
+  {
+    "ingredient_name":"Caramel Color",
+    "aliases":"E150d",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Possible cancer risk"
+  },
+  {
+    "ingredient_name":"Annatto Extract",
+    "aliases":"E160b",
+    "label":0,
+    "risk_level":"Low",
+    "side_effects":"None known"
+  },
+  {
+    "ingredient_name":"Turmeric",
+    "aliases":"E100",
+    "label":0,
+    "risk_level":"Low",
+    "side_effects":"None known"
+  },
+  {
+    "ingredient_name":"Red Dye 40",
+    "aliases":"Allura Red, E129",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Hyperactivity, allergic reactions"
+  },
+  {
+    "ingredient_name":"Yellow Dye 5",
+    "aliases":"Tartrazine, E102",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Hyperactivity, asthma, allergic reactions"
+  },
+  {
+    "ingredient_name":"Blue Dye 1",
+    "aliases":"Brilliant Blue, E133",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Allergic reactions, hyperactivity"
+  },
+  {
+    "ingredient_name":"Red Dye 3",
+    "aliases":"Erythrosine, E127",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Thyroid tumors, allergic reactions"
+  },
+  {
+    "ingredient_name":"Yellow Dye 6",
+    "aliases":"Sunset Yellow, E110",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Hyperactivity, allergic reactions"
+  },
+  {
+    "ingredient_name":"Potassium Bromate",
+    "aliases":"E924a",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Cancer risk, kidney damage"
+  },
+  {
+    "ingredient_name":"Azodicarbonamide",
+    "aliases":"E927a",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Respiratory issues, allergic reactions"
+  },
+  {
+    "ingredient_name":"Calcium Peroxide",
+    "aliases":"E930",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"Irritant, respiratory issues"
+  },
+  {
+    "ingredient_name":"Ammonium Sulfate",
+    "aliases":"E517",
+    "label":1,
+    "risk_level":"Low",
+    "side_effects":"None known in normal amounts"
+  },
+  {
+    "ingredient_name":"Sodium Stearoyl Lactylate",
+    "aliases":"E481",
+    "label":1,
+    "risk_level":"Low",
+    "side_effects":"None known in normal amounts"
+  },
+  {
+    "ingredient_name":"Polysorbate 80",
+    "aliases":"E433",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"Digestive issues, allergic reactions"
+  },
+  {
+    "ingredient_name":"Propylene Glycol",
+    "aliases":"E1520",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"Skin irritation, allergic reactions"
+  },
+  {
+    "ingredient_name":"Ethylene Glycol",
+    "aliases":"Ethylene Glycol",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Toxicity, neurological effects"
+  },
+  {
+    "ingredient_name":"Dimethyl Polysiloxane",
+    "aliases":"E900",
+    "label":1,
+    "risk_level":"Low",
+    "side_effects":"None known in normal amounts"
+  },
+  {
+    "ingredient_name":"Sodium Metabisulfite",
+    "aliases":"E223",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"Respiratory issues, allergic reactions"
+  },
+  {
+    "ingredient_name":"Transglutaminase",
+    "aliases":"Meat Glue",
+    "label":1,
+    "risk_level":"High",
+    "side_effects":"Digestive issues, allergic reactions"
+  },
+  {
+    "ingredient_name":"Carmine",
+    "aliases":"E120, Cochineal",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"Allergic reactions"
+  },
+  {
+    "ingredient_name":"Shellac",
+    "aliases":"E904",
+    "label":1,
+    "risk_level":"Low",
+    "side_effects":"Allergic reactions"
+  },
+  {
+    "ingredient_name":"Sodium Aluminum Phosphate",
+    "aliases":"E541",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"None known in normal amounts"
+  },
+  {
+    "ingredient_name":"Aluminum Sulfate",
+    "aliases":"E523",
+    "label":1,
+    "risk_level":"Moderate",
+    "side_effects":"None known in normal amounts"
+  }
+]

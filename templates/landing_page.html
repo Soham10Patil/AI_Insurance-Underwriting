@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Insurance Underwriting Solution</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-container">
+                <a href="/" class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    InsuranceAI
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="{{ url_for('demo') }}" class="cta-button">Try Demo</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>AI-Powered Insurance Underwriting</h1>
+            <p>Streamline risk assessment, increase efficiency, and make more accurate underwriting decisions with our advanced AI solution.</p>
+            <div class="hero-buttons">
+                <a href="{{ url_for('demo') }}" class="cta-button">Try Demo</a>
+                <a href="#contact" class="demo-button">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Key Features</h2>
+                <p>Our AI-powered solution offers a comprehensive set of features to transform your underwriting process</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-brain feature-icon"></i>
+                    <h3>Advanced Risk Assessment</h3>
+                    <p>Leverage machine learning algorithms to analyze complex risk factors and make data-driven decisions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3>Real-time Analytics</h3>
+                    <p>Get instant insights and visualizations to understand risk factors and decision drivers.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-clock feature-icon"></i>
+                    <h3>Faster Processing</h3>
+                    <p>Reduce underwriting time from days to minutes while maintaining accuracy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="benefits-container">
+                <div class="benefits-content">
+                    <h2>Transform Your Underwriting Process</h2>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check"></i> Reduce manual review time by up to 80%</li>
+                        <li><i class="fas fa-check"></i> Improve decision accuracy with AI insights</li>
+                        <li><i class="fas fa-check"></i> Scale your operations without increasing staff</li>
+                        <li><i class="fas fa-check"></i> Maintain compliance with audit trails</li>
+                    </ul>
+                </div>
+                <div class="benefits-image">
+                    <img src="{{ url_for('static', filename='images/aaimg.png') }}" alt="Benefits Illustration">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get in Touch</h2>
+                <p>Ready to transform your underwriting process? Contact us for a demo or more information.</p>
+            </div>
+            <form class="contact-form" action="/contact" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>InsuranceAI</h3>
+                    <p>Transforming insurance underwriting with artificial intelligence.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="{{ url_for('demo') }}">Demo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@insuranceai.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 InsuranceAI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Handle contact form submission
+        document.querySelector('.contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            try {
+                const response = await fetch('/contact', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    // Show success message
+                    const form = document.querySelector('.contact-form');
+                    form.innerHTML = `
+                        <div class="success-message" style="text-align: center; padding: 20px;">
+                            <i class="fas fa-check-circle" style="color: var(--success-color); font-size: 3rem; margin-bottom: 20px;"></i>
+                            <h3 style="color: var(--secondary-color); margin-bottom: 10px;">Message Sent!</h3>
+                            <p style="color: var(--gray-color);">${result.message}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error sending your message. Please try again later.');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"feature_names": ["age", "bmi", "smoker", "has_diabetes", "has_heart_disease", "blood_pressure", "income", "credit_score", "debt_to_income", "gender_M"], "target_classes": ["approve", "approve_with_conditions", "decline"]}

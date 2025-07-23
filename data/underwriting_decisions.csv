@@ -1,0 +1,1 @@
+timestamp,applicant_id,decision,age,gender,bmi,smoker,has_diabetes,has_heart_disease,blood_pressure,income,credit_score,debt_to_income,override_decision,override_reason

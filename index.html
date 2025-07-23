@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Underwriting PoC</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            color: #2c3e50;
+        }
+        .container {
+            /* display: flex; */
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .application-form {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        } 
+        .results-panel {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .input-desc {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 2px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .decision {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .approve {
+            background-color: #dff2e1;
+            color: #2ecc71;
+        }
+        .approve_with_conditions {
+            background-color: #fef9e6;
+            color: #f39c12;
+        }
+        .decline {
+            background-color: #fae1dd;
+            color: #e74c3c;
+        }
+        .factor-list {
+            margin-top: 20px;
+        }
+        .factor-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .factor-name {
+            font-weight: 500;
+        }
+        .factor-value {
+            font-weight: 700;
+        }
+        .confidence-meter {
+            margin-top: 25px;
+        }
+        .meter-container {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        .meter-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+        .override-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .hidden {
+            display: none;
+        }
+        .loader {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .shap-container {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .shap-plot {
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+        }
+        .shap-bar {
+            height: 30px;
+            margin: 5px 0;
+            position: relative;
+        }
+        .shap-bar-fill {
+            height: 100%;
+            position: absolute;
+            border-radius: 4px;
+        }
+        .shap-bar-label {
+            position: absolute;
+            left: 10px;
+            top: 5px;
+            color: #333;
+            font-size: 0.9em;
+            z-index: 5;
+        }
+        .shap-bar-value {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-weight: bold;
+            font-size: 0.9em;
+            z-index: 5;
+        }
+        .pos-impact {
+            background-color: #2ecc71;
+        }
+        .neg-impact {
+            background-color: #e74c3c;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        .tab.active {
+            border-bottom: 3px solid #3498db;
+            font-weight: bold;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-shield-alt"></i> Insurance Underwriting AI PoC</h1>
+        <p>Automated risk assessment and policy recommendation system</p>
+    </div>
+    
+    <div class="container">
+        <div class="application-form">
+            <form id="underwritingForm">
+                <div class="form-group">
+                    <label for="applicantId">Applicant ID</label>
+                    <input type="text" id="applicantId" placeholder="A unique identifier">
+                </div>
+                
+                <h3>Demographics</h3>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" min="18" max="85" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" required>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+                
+                <h3>Health Information</h3>
+                <div class="form-group">
+                    <label for="bmi">BMI</label>
+                    <input type="number" id="bmi" step="0.1" min="15" max="50" required>
+                    <div class="input-desc">Body Mass Index (weight/height²)</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="smoker">Smoker</label>
+                    <select id="smoker" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hasDiabetes">Has Diabetes</label>
+                    <select id="hasDiabetes" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hasHeartDisease">Has Heart Disease</label>
+                    <select id="hasHeartDisease" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bloodPressure">Blood Pressure (systolic)</label>
+                    <input type="number" id="bloodPressure" min="80" max="200" required>
+                    <div class="input-desc">Normal range: 90-120 mmHg</div>
+                </div>
+                
+                <h3>Financial Information</h3>
+                <div class="form-group">
+                    <label for="income">Annual Income</label>
+                    <input type="number" id="income" min="10000" max="1000000" step="1000" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="creditScore">Credit Score</label>
+                    <input type="number" id="creditScore" min="300" max="850" required>
+                    <div class="input-desc">Range: 300-850</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="debtToIncome">Debt-to-Income Ratio</label>
+                    <input type="number" id="debtToIncome" min="0" max="1" step="0.01" required>
+                    <div class="input-desc">Range: 0.0-1.0 (e.g., 0.35 = 35%)</div>
+                </div>
+                
+                <button type="submit">Evaluate Risk</button>
+            </form>
+            
+            <div class="loader" id="loader">
+                <div class="spinner"></div>
+                <p>Processing application...</p>
+            </div>
+        </div>
+        
+        <div class="results-panel" id="resultsPanel">
+            <h2>Underwriting Decision</h2>
+            
+            <div id="decisionDisplay" class="decision"></div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="confidenceTab">Confidence</div>
+                <div class="tab" data-tab="factorsTab">Risk Factors</div>
+                <div class="tab" data-tab="shapTab">SHAP Explanation</div>
+                <div class="tab" data-tab="overrideTab">Override</div>
+            </div>
+            
+            <div class="tab-content active" id="confidenceTab">
+                <div class="confidence-meter">
+                    <h3>Confidence Levels</h3>
+                    <div id="confidenceLevels"></div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="factorsTab">
+                <div class="factor-list">
+                    <h3>Key Risk Factors</h3>
+                    <div id="riskFactors"></div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="shapTab">
+                <div class="shap-container">
+                    <h3>Feature Importance (SHAP Values)</h3>
+                    <p>How each factor contributed to the underwriting decision:</p>
+                    <div id="shapPlot" class="shap-plot"></div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="overrideTab">
+                <div class="override-section">
+                    <h3>Manual Override</h3>
+                    <p>Use this section if you need to override the automated decision based on additional information.</p>
+                    
+                    <div class="form-group">
+                        <label for="overrideDecision">New Decision</label>
+                        <select id="overrideDecision">
+                            <option value="">Select Decision</option>
+                            <option value="approve">Approve</option>
+                            <option value="approve_with_conditions">Approve with Conditions</option>
+                            <option value="decline">Decline</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="overrideReason">Justification</label>
+                        <textarea id="overrideReason" rows="4" style="width: 100%; border: 1px solid #ddd; border-radius: 4px; padding: 8px;"></textarea>
+                    </div>
+                    
+                    <button id="overrideBtn">Submit Override</button>
+                </div>
+            </div>
+            
+            <button id="newApplicationBtn" style="margin-top: 30px;">New Application</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission
+            const underwritingForm = document.getElementById('underwritingForm');
+            const loader = document.getElementById('loader');
+            const resultsPanel = document.getElementById('resultsPanel');
+            
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and content
+                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // New application button
+            document.getElementById('newApplicationBtn').addEventListener('click', () => {
+                underwritingForm.reset();
+                resultsPanel.style.display = 'none';
+                document.querySelector('.application-form').style.display = 'block';
+                underwritingForm.style.display = 'block'; // Ensure the form is displayed again
+            });
+            
+            // Override button
+            document.getElementById('overrideBtn').addEventListener('click', () => {
+                const overrideDecision = document.getElementById('overrideDecision').value;
+                const overrideReason = document.getElementById('overrideReason').value;
+                
+                if (!overrideDecision || !overrideReason) {
+                    alert('Please select a decision and provide justification.');
+                    return;
+                }
+                
+                // Update decision display with override
+                const decisionDisplay = document.getElementById('decisionDisplay');
+                decisionDisplay.className = 'decision ' + overrideDecision;
+                decisionDisplay.innerHTML = `
+                    <div>${formatDecision(overrideDecision)}</div>
+                    <div style="font-size: 14px; margin-top: 10px;">OVERRIDDEN BY UNDERWRITER</div>
+                `;
+                
+                // Switch to confidence tab
+                tabs[0].click();
+                
+                alert('Override applied successfully!');
+            });
+            
+            // Form submission
+            underwritingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+    
+                // Show loader
+                loader.style.display = 'block';
+                underwritingForm.style.display = 'none'; // This hides the form
+    
+                // Get form data
+                const formData = {
+                    applicantId: document.getElementById('applicantId').value || generateId(),
+                    age: parseInt(document.getElementById('age').value),
+                    gender: document.getElementById('gender').value,
+                    bmi: parseFloat(document.getElementById('bmi').value),
+                    smoker: parseInt(document.getElementById('smoker').value),
+                    hasDiabetes: parseInt(document.getElementById('hasDiabetes').value),
+                    hasHeartDisease: parseInt(document.getElementById('hasHeartDisease').value),
+                    bloodPressure: parseInt(document.getElementById('bloodPressure').value),
+                    income: parseInt(document.getElementById('income').value),
+                    creditScore: parseInt(document.getElementById('creditScore').value),
+                    debtToIncome: parseFloat(document.getElementById('debtToIncome').value)
+                };
+    
+                // Simulate API call with a delay
+                setTimeout(() => {
+                    // Process the underwriting decision
+                    const result = evaluateApplication(formData);
+                    displayResults(result);
+        
+                    // Hide loader, show results
+                    loader.style.display = 'none';
+                    resultsPanel.style.display = 'block';
+                }, 1500);
+            });
+
+            // New application button
+            document.getElementById('newApplicationBtn').addEventListener('click', () => {
+                underwritingForm.reset();
+                resultsPanel.style.display = 'none';
+                document.querySelector('.application-form').style.display = 'block';
+                underwritingForm.style.display = 'block'; // Add this line to show the form again
+            });            
+            // Helper function to generate a random ID
+            function generateId() {
+                return 'APP' + Math.floor(Math.random() * 1000000);
+            }
+            
+            // Function to evaluate the application
+            function evaluateApplication(data) {
+                // Risk scores calculation (simplified for demo purposes)
+                let healthRiskScore = 0;
+                let financialRiskScore = 0;
+                
+                // Health risk factors
+                if (data.age > 60) healthRiskScore += 20;
+                if (data.bmi > 30) healthRiskScore += 15;
+                if (data.smoker) healthRiskScore += 25;
+                if (data.hasDiabetes) healthRiskScore += 20;
+                if (data.hasHeartDisease) healthRiskScore += 30;
+                if (data.bloodPressure > 140) healthRiskScore += 15;
+                
+                // Financial risk factors
+                if (data.creditScore < 650) financialRiskScore += 25;
+                if (data.debtToIncome > 0.4) financialRiskScore += 20;
+                if (data.income < 30000) financialRiskScore += 15;
+                
+                // Normalize scores to 0-100
+                healthRiskScore = Math.min(100, healthRiskScore);
+                financialRiskScore = Math.min(100, financialRiskScore);
+                
+                // Overall risk score (weighted average)
+                const overallRiskScore = (healthRiskScore * 0.7) + (financialRiskScore * 0.3);
+                
+                // Determine decision
+                let decision;
+                if (overallRiskScore < 30) {
+                    decision = 'approve';
+                } else if (overallRiskScore < 60) {
+                    decision = 'approve_with_conditions';
+                } else {
+                    decision = 'decline';
+                }
+                
+                // Generate confidence levels
+                const confidenceLevels = {
+                    approve: Math.max(0, 100 - overallRiskScore),
+                    approve_with_conditions: 100 - Math.abs(overallRiskScore - 45),
+                    decline: Math.max(0, overallRiskScore - 10)
+                };
+                
+                // Generate SHAP values (simplified)
+                const shapValues = [
+                    { feature: 'Age', value: data.age, impact: data.age > 60 ? -0.3 : 0.1 },
+                    { feature: 'BMI', value: data.bmi, impact: data.bmi > 30 ? -0.25 : 0.05 },
+                    { feature: 'Smoker', value: data.smoker ? 'Yes' : 'No', impact: data.smoker ? -0.4 : 0.2 },
+                    { feature: 'Diabetes', value: data.hasDiabetes ? 'Yes' : 'No', impact: data.hasDiabetes ? -0.3 : 0.1 },
+                    { feature: 'Heart Disease', value: data.hasHeartDisease ? 'Yes' : 'No', impact: data.hasHeartDisease ? -0.45 : 0.15 },
+                    { feature: 'Blood Pressure', value: data.bloodPressure, impact: data.bloodPressure > 140 ? -0.2 : 0.05 },
+                    { feature: 'Credit Score', value: data.creditScore, impact: data.creditScore < 650 ? -0.35 : 0.15 },
+                    { feature: 'Debt Ratio', value: (data.debtToIncome * 100).toFixed(1) + '%', impact: data.debtToIncome > 0.4 ? -0.25 : 0.1 },
+                    { feature: 'Income', value: '$' + data.income.toLocaleString(), impact: data.income < 30000 ? -0.2 : 0.1 }
+                ];
+                
+                // Sort SHAP values by absolute impact
+                shapValues.sort((a, b) => Math.abs(b.impact) - Math.abs(a.impact));
+                
+                return {
+                    applicantId: data.applicantId,
+                    decision: decision,
+                    healthRiskScore: healthRiskScore,
+                    financialRiskScore: financialRiskScore,
+                    overallRiskScore: overallRiskScore,
+                    confidenceLevels: confidenceLevels,
+                    shapValues: shapValues,
+                    data: data
+                };
+            }
+            
+            // Function to display results
+            function displayResults(result) {
+                // Display decision
+                const decisionDisplay = document.getElementById('decisionDisplay');
+                decisionDisplay.className = 'decision ' + result.decision;
+                decisionDisplay.textContent = formatDecision(result.decision);
+                
+                // Display confidence levels
+                const confidenceLevels = document.getElementById('confidenceLevels');
+                confidenceLevels.innerHTML = '';
+                
+                const decisions = ['approve', 'approve_with_conditions', 'decline'];
+                const colors = ['#2ecc71', '#f39c12', '#e74c3c'];
+                const labels = ['Approve', 'Approve with Conditions', 'Decline'];
+                
+                decisions.forEach((decision, index) => {
+                    const confidenceValue = result.confidenceLevels[decision];
+                    
+                    const item = document.createElement('div');
+                    item.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>${labels[index]}</span>
+                            <span>${confidenceValue.toFixed(1)}%</span>
+                        </div>
+                        <div class="meter-container">
+                            <div class="meter-fill" style="width: ${confidenceValue}%; background-color: ${colors[index]};"></div>
+                        </div>
+                    `;
+                    confidenceLevels.appendChild(item);
+                    confidenceLevels.appendChild(document.createElement('br'));
+                });
+                
+                // Display risk factors
+                const riskFactors = document.getElementById('riskFactors');
+                riskFactors.innerHTML = `
+                    <div class="factor-item">
+                        <span class="factor-name">Health Risk Score</span>
+                        <span class="factor-value">${result.healthRiskScore.toFixed(1)}%</span>
+                    </div>
+                    <div class="factor-item">
+                        <span class="factor-name">Financial Risk Score</span>
+                        <span class="factor-value">${result.financialRiskScore.toFixed(1)}%</span>
+                    </div>
+                    <div class="factor-item">
+                        <span class="factor-name">Overall Risk Score</span>
+                        <span class="factor-value">${result.overallRiskScore.toFixed(1)}%</span>
+                    </div>
+                `;
+                
+                // Generate key findings based on the data
+                const findings = [];
+                const data = result.data;
+                
+                if (data.smoker) findings.push("Applicant is a smoker");
+                if (data.hasDiabetes) findings.push("Applicant has diabetes");
+                if (data.hasHeartDisease) findings.push("Applicant has heart disease");
+                if (data.bmi > 30) findings.push("BMI indicates obesity");
+                if (data.bloodPressure > 140) findings.push("Elevated blood pressure");
+                if (data.creditScore < 650) findings.push("Below average credit score");
+                if (data.debtToIncome > 0.4) findings.push("High debt-to-income ratio");
+                
+                if (findings.length > 0) {
+                    const findingsDiv = document.createElement('div');
+                    findingsDiv.innerHTML = `
+                        <h4 style="margin-top: 20px;">Key Findings</h4>
+                        <ul style="padding-left: 20px;">
+                            ${findings.map(finding => `<li>${finding}</li>`).join('')}
+                        </ul>
+                    `;
+                    riskFactors.appendChild(findingsDiv);
+                }
+                
+                // Display SHAP values
+                const shapPlot = document.getElementById('shapPlot');
+                shapPlot.innerHTML = '';
+                
+                result.shapValues.forEach(feature => {
+                    const barWidth = Math.abs(feature.impact) * 100;
+                    const isPositive = feature.impact > 0;
+                    const barClass = isPositive ? 'pos-impact' : 'neg-impact';
+                    const barStyle = isPositive 
+                        ? `width: ${barWidth}%; left: 50%;` 
+                        : `width: ${barWidth}%; right: 50%;`;
+                    
+                    const barDiv = document.createElement('div');
+                    barDiv.className = 'shap-bar';
+                    barDiv.innerHTML = `
+                        <div class="shap-bar-fill ${barClass}" style="${barStyle}"></div>
+                        <span class="shap-bar-label">${feature.feature}: ${feature.value}</span>
+                        <span class="shap-bar-value">${(feature.impact * 100).toFixed(1)}%</span>
+                    `;
+                    shapPlot.appendChild(barDiv);
+                });
+            }
+            
+            // Format decision for display
+            function formatDecision(decision) {
+                switch(decision) {
+                    case 'approve': return 'APPROVED';
+                    case 'approve_with_conditions': return 'APPROVED WITH CONDITIONS';
+                    case 'decline': return 'DECLINED';
+                    default: return 'PENDING';
+                }
+            }
+            
+            // Pre-fill form with sample data for testing
+            document.getElementById('age').value = 45;
+            document.getElementById('bmi').value = 27.5;
+            document.getElementById('bloodPressure').value = 130;
+            document.getElementById('income').value = 75000;
+            document.getElementById('creditScore').value = 720;
+            document.getElementById('debtToIncome').value = 0.32;
+        });
+    </script>
+</body>
+</html>

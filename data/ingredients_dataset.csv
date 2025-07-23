@@ -1,0 +1,51 @@
+ingredient_name,aliases,label,risk_level,side_effects
+Ascorbic Acid,"Vitamin C, L-Ascorbic Acid",0,Low,None known
+Citric Acid,E330,0,Low,None known
+Sodium Chloride,"Salt, NaCl",0,Low,High blood pressure if excessive
+Sugar,"Sucrose, Cane Sugar",0,Moderate,"Diabetes, obesity if excessive"
+Water,H2O,0,Low,None known
+Monosodium Glutamate,"MSG, E621",1,High,"Headaches, nausea, allergic reactions"
+Sodium Benzoate,E211,1,Moderate,"Hyperactivity, allergic reactions"
+Potassium Sorbate,E202,1,Moderate,"Skin irritation, allergic reactions"
+Calcium Propionate,E282,1,Moderate,None known in normal amounts
+Sodium Nitrite,E250,1,High,"Cancer risk, methemoglobinemia"
+Aspartame,"E951, NutraSweet",1,High,"Headaches, seizures, mood disorders"
+Acesulfame Potassium,"Ace-K, E950",1,High,"Headaches, depression"
+Sucralose,"E955, Splenda",1,Moderate,"Digestive issues, headaches"
+Saccharin,E954,1,High,"Cancer risk, bladder tumors"
+High Fructose Corn Syrup,"HFCS, Corn Syrup",1,High,"Obesity, diabetes, liver damage"
+Butylated Hydroxyanisole,"BHA, E320",1,High,"Cancer risk, endocrine disruption"
+Butylated Hydroxytoluene,"BHT, E321",1,High,"Cancer risk, hormone disruption"
+Tertiary Butylhydroquinone,"TBHQ, E319",1,High,"Nausea, vomiting, delirium"
+Propyl Gallate,E310,1,Moderate,"Allergic reactions, stomach upset"
+Sodium Sulfite,E221,1,Moderate,"Headaches, nausea, diarrhea"
+Carrageenan,E407,1,High,"Inflammation, digestive issues"
+Xanthan Gum,E415,0,Low,Digestive upset in large amounts
+Guar Gum,E412,0,Low,Digestive upset in large amounts
+Lecithin,E322,0,Low,None known
+Pectin,E440,0,Low,None known
+Artificial Vanilla,Vanillin,1,Moderate,Allergic reactions in sensitive individuals
+Natural Flavors,Natural Flavoring,0,Low,Allergic reactions possible
+Caramel Color,E150d,1,High,Possible cancer risk
+Annatto Extract,E160b,0,Low,None known
+Turmeric,E100,0,Low,None known
+Red Dye 40,"Allura Red, E129",1,High,"Hyperactivity, allergic reactions"
+Yellow Dye 5,"Tartrazine, E102",1,High,"Hyperactivity, asthma, allergic reactions"
+Blue Dye 1,"Brilliant Blue, E133",1,High,"Allergic reactions, hyperactivity"
+Red Dye 3,"Erythrosine, E127",1,High,"Thyroid tumors, allergic reactions"
+Yellow Dye 6,"Sunset Yellow, E110",1,High,"Hyperactivity, allergic reactions"
+Potassium Bromate,E924a,1,High,"Cancer risk, kidney damage"
+Azodicarbonamide,E927a,1,High,"Respiratory issues, allergic reactions"
+Calcium Peroxide,E930,1,Moderate,"Irritant, respiratory issues"
+Ammonium Sulfate,E517,1,Low,None known in normal amounts
+Sodium Stearoyl Lactylate,E481,1,Low,None known in normal amounts
+Polysorbate 80,E433,1,Moderate,"Digestive issues, allergic reactions"
+Propylene Glycol,E1520,1,Moderate,"Skin irritation, allergic reactions"
+Ethylene Glycol,Ethylene Glycol,1,High,"Toxicity, neurological effects"
+Dimethyl Polysiloxane,E900,1,Low,None known in normal amounts
+Sodium Metabisulfite,E223,1,Moderate,"Respiratory issues, allergic reactions"
+Transglutaminase,Meat Glue,1,High,"Digestive issues, allergic reactions"
+Carmine,"E120, Cochineal",1,Moderate,Allergic reactions
+Shellac,E904,1,Low,Allergic reactions
+Sodium Aluminum Phosphate,E541,1,Moderate,None known in normal amounts
+Aluminum Sulfate,E523,1,Moderate,None known in normal amounts
